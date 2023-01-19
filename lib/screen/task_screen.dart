@@ -19,18 +19,20 @@ class TaskScreen extends StatelessWidget {
         const Center(
           child: Chip(label: Text('Tasks')),
         ),
-        ListView.builder(
-          itemBuilder: (context, index) {
-            var task = tasklist[index];
-            return ListTile(
-              title: Text(task.title),
-              trailing: Checkbox(
-                onChanged: (value) {},
-                value: task.isDone,
-              ),
-            );
-          },
-          itemCount: tasklist.length,
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              var task = tasklist[index];
+              return ListTile(
+                title: Text(task.title),
+                trailing: Checkbox(
+                  onChanged: (value) {},
+                  value: task.isDone,
+                ),
+              );
+            },
+            itemCount: tasklist.length,
+          ),
         )
       ]),
     );
