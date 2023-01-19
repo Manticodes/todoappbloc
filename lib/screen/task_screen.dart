@@ -1,40 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
+
+import '../widgets/add_task_widget.dart';
+import '../widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
   TaskScreen({super.key});
-  List<Task> tasklist = [
-    Task(title: 'Task1'),
-    Task(title: 'Task2'),
-    Task(title: 'Task3'),
-  ];
+  TextEditingController titleController = TextEditingController();
+  void _addTask(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return SingleChildScrollView(
+            child: addTaskWidget(titleController: titleController),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Todo App'),
-      ),
-      body: Column(children: [
-        const Center(
-          child: Chip(label: Text('Tasks')),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              var task = tasklist[index];
-              return ListTile(
-                title: Text(task.title),
-                trailing: Checkbox(
-                  onChanged: (value) {},
-                  value: task.isDone,
-                ),
-              );
-            },
-            itemCount: tasklist.length,
+    return BlocBuilder<TasksBloc, TasksState>(
+      builder: (context, state) {
+        List<Task> taskList = state.allTasks;
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Todo App'),
           ),
-        )
-      ]),
+          body: Column(children: [
+            const Center(
+              child: Chip(label: Text('Tasks')),
+            ),
+            TaskList(tasklist: taskList)
+          ]),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _addTask(context),
+            tooltip: 'Add Task',
+            child: const Icon(Icons.add),
+          ),
+        );
+      },
     );
   }
 }
