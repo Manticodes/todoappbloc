@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoappbloc/screen/task_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -6,20 +7,6 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: const HomePage(),
+    home: TaskScreen(),
   ));
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('title here'),
-      ),
-      body: Container(),
-    );
-  }
 }
