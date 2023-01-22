@@ -17,13 +17,51 @@ class TaskList extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           var task = tasklist[index];
-          return ListTile(
-            title: Text(task.title),
-            trailing: Checkbox(
-              onChanged: (value) {
+          return Dismissible(
+            background: Container(
+              alignment: Alignment.centerLeft,
+              color: Colors.red,
+              child: const Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Icon(Icons.delete),
+              ),
+            ),
+            secondaryBackground: Container(
+              alignment: Alignment.centerRight,
+              color: Colors.green,
+              child: const Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Icon(Icons.done),
+              ),
+            ),
+            key: Key(task.title +
+                task.isDone.toString() +
+                task.isDeleted.toString()),
+            onDismissed: (direction) {
+              if (direction == DismissDirection.startToEnd) {
+                context.read<TasksBloc>().add(DeleteTask(task: task));
+              } else {
                 context.read<TasksBloc>().add(UpdateTask(task: task));
-              },
-              value: task.isDone,
+              }
+            },
+            child: ListTile(
+              title: Text(task.title),
+              trailing: Wrap(
+                children: [
+                  Checkbox(
+                    onChanged: (value) {
+                      context.read<TasksBloc>().add(UpdateTask(task: task));
+                    },
+                    value: task.isDone,
+                  ),
+                ],
+              ),
+              subtitle: InkWell(
+                child: Text('remove'),
+                onTap: () {
+                  context.read<TasksBloc>().add(DeleteTask(task: task));
+                },
+              ),
             ),
           );
         },

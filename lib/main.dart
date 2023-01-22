@@ -6,8 +6,7 @@ import 'blocs/bloc_exports.dart';
 
 void main() {
   BlocOverrides.runZoned(() => runApp(BlocProvider(
-        create: (context) =>
-            TasksBloc()..add(AddTask(task: Task(title: 'testing'))),
+        create: (context) => TasksBloc(),
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(

@@ -52,7 +52,7 @@ class addTaskWidget extends StatelessWidget {
                       onTap: () {
                         var task = Task(title: titleController.text);
                         context.read<TasksBloc>().add(AddTask(task: task));
-                        Navigator.pop(context);
+
                         titleController.clear();
                       },
                     )),
