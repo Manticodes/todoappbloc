@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
+import 'package:todoappbloc/services/id_gen.dart';
+import 'package:uuid/uuid.dart';
 
 class addTaskWidget extends StatelessWidget {
   const addTaskWidget({
@@ -50,8 +52,10 @@ class addTaskWidget extends StatelessWidget {
                             color: Colors.white),
                       ),
                       onTap: () {
-                        var task = Task(title: titleController.text);
+                        String id = IdGen.genId();
+                        var task = Task(title: titleController.text, id: id);
                         context.read<TasksBloc>().add(AddTask(task: task));
+                        print(id);
 
                         titleController.clear();
                       },

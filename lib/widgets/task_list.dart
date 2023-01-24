@@ -34,15 +34,14 @@ class TaskList extends StatelessWidget {
                 child: Icon(Icons.done),
               ),
             ),
-            key: Key(task.title +
-                task.isDone.toString() +
-                task.isDeleted.toString()),
+            key: Key(task.id),
             onDismissed: (direction) {
               if (direction == DismissDirection.startToEnd) {
                 context.read<TasksBloc>().add(DeleteTask(task: task));
               } else {
                 context.read<TasksBloc>().add(UpdateTask(task: task));
               }
+              print(task.id);
             },
             child: ListTile(
               title: Text(task.title),
