@@ -59,6 +59,7 @@ class TaskList extends StatelessWidget {
                 child: Text('remove'),
                 onTap: () {
                   context.read<TasksBloc>().add(DeleteTask(task: task));
+                  print(task.id);
                 },
               ),
             ),

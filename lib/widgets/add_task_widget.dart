@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
 import 'package:todoappbloc/services/id_gen.dart';
-import 'package:uuid/uuid.dart';
 
 class addTaskWidget extends StatelessWidget {
   const addTaskWidget({
