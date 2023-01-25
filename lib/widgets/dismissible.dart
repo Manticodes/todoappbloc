@@ -30,7 +30,7 @@ class DismissibleTile extends StatelessWidget {
           child: Icon(Icons.done),
         ),
       ),
-      key: Key(task.id),
+      key: Key(task.id + task.isDone.toString()),
       onDismissed: (direction) {
         if (direction == DismissDirection.startToEnd) {
           context.read<TasksBloc>().add(DeleteTask(task: task));
@@ -43,7 +43,8 @@ class DismissibleTile extends StatelessWidget {
           task.title,
           style: TextStyle(
               decoration: task.isDone! ? TextDecoration.lineThrough : null,
-              decorationThickness: 1.8),
+              decorationThickness: 3,
+              decorationColor: Colors.purple),
         ),
         trailing: Wrap(
           children: [

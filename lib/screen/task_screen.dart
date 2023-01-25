@@ -23,13 +23,17 @@ class TaskScreen extends StatelessWidget {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
         final List<Task> taskList = state.allTasks;
+        String length = state.allTasks
+            .where((element) => element.isDone as bool)
+            .length
+            .toString();
         return Scaffold(
           appBar: AppBar(
             title: const Text('Todo App'),
           ),
           body: Column(children: [
-            const Center(
-              child: Chip(label: Text('Tasks')),
+            Center(
+              child: Chip(label: Text("$length Task Todo")),
             ),
             TaskList(tasklist: taskList)
           ]),
