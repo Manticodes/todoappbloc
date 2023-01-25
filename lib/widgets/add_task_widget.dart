@@ -3,8 +3,8 @@ import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
 import 'package:todoappbloc/services/id_gen.dart';
 
-class addTaskWidget extends StatelessWidget {
-  const addTaskWidget({
+class AddTaskWidget extends StatelessWidget {
+  const AddTaskWidget({
     Key? key,
     required this.titleController,
   }) : super(key: key);
@@ -54,7 +54,6 @@ class addTaskWidget extends StatelessWidget {
                         String id = IdGen.genId();
                         var task = Task(title: titleController.text, id: id);
                         context.read<TasksBloc>().add(AddTask(task: task));
-                        print(id);
 
                         titleController.clear();
                       },

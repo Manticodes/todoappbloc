@@ -12,9 +12,15 @@ void main() async {
   runApp(BlocProvider(
     create: (context) => TasksBloc(),
     child: MaterialApp(
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          useMaterial3: true,
+          appBarTheme: AppBarTheme(centerTitle: true)),
+      themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
       ),
       home: TaskScreen(),
     ),

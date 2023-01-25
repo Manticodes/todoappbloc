@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Task extends Equatable {
   final String title;
   final String id;

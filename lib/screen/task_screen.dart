@@ -7,13 +7,13 @@ import '../widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
   TaskScreen({super.key});
-  TextEditingController titleController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   void _addTask(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
           return SingleChildScrollView(
-            child: addTaskWidget(titleController: titleController),
+            child: AddTaskWidget(titleController: titleController),
           );
         });
   }
@@ -22,7 +22,7 @@ class TaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> taskList = state.allTasks;
+        final List<Task> taskList = state.allTasks;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Todo App'),
