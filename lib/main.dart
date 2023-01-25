@@ -15,7 +15,7 @@ void main() async {
       darkTheme: ThemeData(
           brightness: Brightness.dark,
           useMaterial3: true,
-          appBarTheme: AppBarTheme(centerTitle: true)),
+          appBarTheme: const AppBarTheme(centerTitle: true)),
       themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
       theme: ThemeData(

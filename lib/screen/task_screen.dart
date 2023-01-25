@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
+import 'package:todoappbloc/screen/drawer.dart';
 
 import '../widgets/add_task_widget.dart';
 import '../widgets/task_list.dart';
@@ -24,10 +25,11 @@ class TaskScreen extends StatelessWidget {
       builder: (context, state) {
         final List<Task> taskList = state.allTasks;
         String length = state.allTasks
-            .where((element) => element.isDone as bool)
+            .where((element) => element.isDone == false)
             .length
             .toString();
         return Scaffold(
+          drawer: MyDrawer(),
           appBar: AppBar(
             title: const Text('Todo App'),
           ),
