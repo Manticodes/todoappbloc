@@ -3,6 +3,7 @@ import 'package:todoappbloc/screen/recycle_bin.dart';
 import 'package:todoappbloc/screen/task_screen.dart';
 
 import '../blocs/bloc_exports.dart';
+import '../widgets/costume_divider.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -41,12 +42,7 @@ class MyDrawer extends StatelessWidget {
                 );
               },
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Divider(
-                thickness: 0.3,
-              ),
-            ),
+            const CostumeDivider(),
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return InkWell(
@@ -63,17 +59,37 @@ class MyDrawer extends StatelessWidget {
                 );
               },
             ),
-            BlocBuilder<SwitchBloc, SwitchState>(
-              builder: (context, state) {
-                return Switch(
-                  value: state.switchValue,
-                  onChanged: (value) {
-                    value
-                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
-                        : context.read<SwitchBloc>().add(SwitchOffEvent());
-                  },
-                );
-              },
+            const CostumeDivider(),
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text('Choose Theme'),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 15),
+                    child: Icon(Icons.light_mode_rounded),
+                  ),
+                  BlocBuilder<SwitchBloc, SwitchState>(
+                    builder: (context, state) {
+                      return Switch(
+                        value: state.switchValue,
+                        onChanged: (value) {
+                          context.read<SwitchBloc>().add(const SwitchEvent());
+                        },
+                      );
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Icon(Icons.dark_mode_rounded),
+                  )
+                ],
+              ),
             )
           ],
         ),

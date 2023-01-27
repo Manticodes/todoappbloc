@@ -4,17 +4,24 @@ import 'package:todoappbloc/blocs/bloc_exports.dart';
 part 'switch_event.dart';
 part 'switch_state.dart';
 
-class SwitchBloc extends Bloc<SwitchEvent, SwitchState> {
+class SwitchBloc extends HydratedBloc<SwitchEvent, SwitchState> {
   SwitchBloc() : super(const SwitchInitial(switchValue: false)) {
-    on<SwitchOnEvent>(_switchOnEvent);
-    on<SwitchOffEvent>(_switchOffEvent);
+    on<SwitchEvent>(_switchOnEvent);
   }
 
-  void _switchOnEvent(SwitchOnEvent event, Emitter<SwitchState> emit) {
-    emit(const SwitchState(switchValue: true));
+  void _switchOnEvent(SwitchEvent event, Emitter<SwitchState> emit) {
+    final state = this.state;
+    final bool newstate = !state.switchValue;
+    emit(SwitchState(switchValue: newstate));
   }
 
-  void _switchOffEvent(SwitchOffEvent event, Emitter<SwitchState> emit) {
-    emit(const SwitchState(switchValue: false));
+  @override
+  SwitchState? fromJson(Map<String, dynamic> json) {
+    return SwitchState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(SwitchState state) {
+    return state.toMap();
   }
 }

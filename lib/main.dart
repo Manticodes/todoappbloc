@@ -38,9 +38,9 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             darkTheme: ThemeData(
-                colorScheme: darkColorScheme,
-                useMaterial3: true,
-                appBarTheme: const AppBarTheme(centerTitle: true)),
+              colorScheme: darkColorScheme,
+              useMaterial3: true,
+            ),
             themeMode: state.switchValue ? ThemeMode.dark : ThemeMode.light,
             title: 'Flutter Demo',
             theme: ThemeData(
