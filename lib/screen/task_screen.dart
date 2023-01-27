@@ -7,6 +7,7 @@ import '../widgets/add_task_widget.dart';
 import '../widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
+  static const id = 'tasks_screen';
   TaskScreen({super.key});
   final TextEditingController titleController = TextEditingController();
   void _addTask(BuildContext context) {

@@ -45,8 +45,8 @@ class AddTaskWidget extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      child: const CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 147, 211, 149),
+                      child: CircleAvatar(
+                        backgroundColor: Theme.of(context).primaryColorDark,
                         child: Icon(Icons.done_outline_rounded,
                             color: Colors.white),
                       ),

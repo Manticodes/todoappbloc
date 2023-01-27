@@ -43,7 +43,7 @@ class DismissibleTile extends StatelessWidget {
           task.title,
           style: TextStyle(
               decoration: task.isDone! ? TextDecoration.lineThrough : null,
-              decorationThickness: 3,
+              decorationThickness: 4,
               decorationColor: Colors.purple),
         ),
         trailing: Wrap(
