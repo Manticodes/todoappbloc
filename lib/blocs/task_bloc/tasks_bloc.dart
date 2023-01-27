@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 import 'package:todoappbloc/models/task.dart';
 import '../bloc_exports.dart';
@@ -13,6 +11,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<UpdateTask>(_onUpdateTask);
     on<DeleteTask>(_onDeleteTask);
     on<RemovedTask>(_onRemovedTask);
+    on<FavTask>(_onFavTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -47,6 +46,16 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     emit(TasksState(
         allTasks: state.allTasks,
         deletedTasks: List.from(state.deletedTasks)..remove(task)));
+  }
+
+  void _onFavTask(FavTask event, Emitter<TasksState> emit) {
+    final task = event.task;
+    final state = this.state;
+    List<Task> allTasks = List.from(state.allTasks);
+    int index = allTasks.indexOf(task);
+    bool isFav = !task.isFav!;
+    allTasks[index] = task.copyWith(isFav: isFav);
+    emit(TasksState(allTasks: allTasks, deletedTasks: state.deletedTasks));
   }
 
   @override

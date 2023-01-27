@@ -46,8 +46,24 @@ class DismissibleTile extends StatelessWidget {
               decorationThickness: 4,
               decorationColor: Colors.purple),
         ),
-        trailing: Wrap(
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
+            InkWell(
+              child: task.isFav!
+                  ? const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )
+                  : const Icon(Icons.favorite_border_rounded),
+              onTap: () {
+                context.read<TasksBloc>().add(FavTask(task: task));
+                print(task.isFav);
+              },
+            ),
+            const SizedBox(
+              width: 10,
+            ),
             Checkbox(
               onChanged: (value) {
                 context.read<TasksBloc>().add(UpdateTask(task: task));
@@ -57,7 +73,7 @@ class DismissibleTile extends StatelessWidget {
           ],
         ),
         subtitle: InkWell(
-          child: const Text('remove'),
+          child: Text('Delete'),
           onTap: () {
             context.read<TasksBloc>().add(DeleteTask(task: task));
           },

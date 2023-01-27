@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:todoappbloc/screen/tab_screen.dart';
 
-import 'package:todoappbloc/screen/task_screen.dart';
 import 'package:todoappbloc/services/app_router.dart';
 import 'package:todoappbloc/services/color_scheme.g.dart';
 
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
               colorScheme: lightColorScheme,
             ),
-            home: TaskScreen(),
+            home: TabScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

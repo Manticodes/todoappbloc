@@ -6,14 +6,16 @@ class Task extends Equatable {
   final String id;
   bool? isDone;
   bool? isDeleted;
-  Task({
-    required this.title,
-    required this.id,
-    this.isDone,
-    this.isDeleted,
-  }) {
+  bool? isFav;
+  Task(
+      {required this.title,
+      required this.id,
+      this.isDone,
+      this.isDeleted,
+      this.isFav}) {
     isDone = isDone ?? false;
     isDeleted = isDeleted ?? false;
+    isFav = isFav ?? false;
   }
 
   Task copyWith({
@@ -21,13 +23,14 @@ class Task extends Equatable {
     String? id,
     bool? isDone,
     bool? isDeleted,
+    bool? isFav,
   }) {
     return Task(
-      title: title ?? this.title,
-      isDone: isDone ?? this.isDone,
-      isDeleted: isDeleted ?? this.isDeleted,
-      id: id ?? this.id,
-    );
+        title: title ?? this.title,
+        isDone: isDone ?? this.isDone,
+        isDeleted: isDeleted ?? this.isDeleted,
+        id: id ?? this.id,
+        isFav: isFav ?? this.isFav);
   }
 
   Map<String, dynamic> toMap() {
@@ -41,6 +44,9 @@ class Task extends Equatable {
     if (isDeleted != null) {
       result.addAll({'isDeleted': isDeleted});
     }
+    if (isFav != null) {
+      result.addAll({'isFav': isFav});
+    }
 
     return result;
   }
@@ -51,9 +57,10 @@ class Task extends Equatable {
       id: map['id'] ?? '',
       isDone: map['isDone'],
       isDeleted: map['isDeleted'],
+      isFav: map['isFav'],
     );
   }
 
   @override
-  List<Object?> get props => [title, id, isDone, isDeleted];
+  List<Object?> get props => [title, id, isDone, isDeleted, isFav];
 }

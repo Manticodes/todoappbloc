@@ -42,3 +42,12 @@ class RemovedTask extends TasksEvent {
   @override
   List<Object> get props => [task];
 }
+
+class FavTask extends TasksEvent {
+  final Task task;
+  const FavTask({
+    required this.task,
+  });
+  @override
+  List<Object> get props => [task];
+}

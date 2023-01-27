@@ -11,7 +11,7 @@ class RecycleBin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       appBar: AppBar(
         title: const Text('Bin'),
       ),

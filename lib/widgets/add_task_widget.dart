@@ -47,7 +47,7 @@ class AddTaskWidget extends StatelessWidget {
                     child: InkWell(
                       child: CircleAvatar(
                         backgroundColor: Theme.of(context).primaryColorDark,
-                        child: Icon(Icons.done_outline_rounded,
+                        child: const Icon(Icons.done_outline_rounded,
                             color: Colors.white),
                       ),
                       onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoappbloc/screen/recycle_bin.dart';
+import 'package:todoappbloc/screen/tab_screen.dart';
 import 'package:todoappbloc/screen/task_screen.dart';
 
 import '../blocs/bloc_exports.dart';
@@ -30,7 +31,7 @@ class MyDrawer extends StatelessWidget {
               builder: (context, state) {
                 return InkWell(
                   onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(TaskScreen.id),
+                      Navigator.of(context).pushReplacementNamed(TabScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
                     title: Text(

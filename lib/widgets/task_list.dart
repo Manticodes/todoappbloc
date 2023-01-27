@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 import '../models/task.dart';
 import 'dismissible.dart';
 
@@ -16,6 +14,7 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        shrinkWrap: true,
         itemBuilder: (context, index) {
           var task = tasklist[index];
           return DismissibleTile(task: task);
