@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoappbloc/screen/recycle_bin.dart';
 import 'package:todoappbloc/screen/tab_screen.dart';
-import 'package:todoappbloc/screen/task_screen.dart';
-
 import '../blocs/bloc_exports.dart';
 import '../widgets/costume_divider.dart';
 

@@ -16,7 +16,7 @@ class FavScreen extends StatelessWidget {
         final String length = taskList.length.toString();
         return Column(children: [
           Center(
-            child: Chip(label: Text("$length Completed")),
+            child: Chip(label: Text("$length FAV Task")),
           ),
           TaskList(tasklist: taskList)
         ]);

@@ -58,7 +58,6 @@ class DismissibleTile extends StatelessWidget {
                   : const Icon(Icons.favorite_border_rounded),
               onTap: () {
                 context.read<TasksBloc>().add(FavTask(task: task));
-                print(task.isFav);
               },
             ),
             const SizedBox(
@@ -73,7 +72,7 @@ class DismissibleTile extends StatelessWidget {
           ],
         ),
         subtitle: InkWell(
-          child: Text('Delete'),
+          child: const Text('Delete'),
           onTap: () {
             context.read<TasksBloc>().add(DeleteTask(task: task));
           },

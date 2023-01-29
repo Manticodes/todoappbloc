@@ -16,7 +16,7 @@ class AppRouter {
         );
       case TabScreen.id:
         return MaterialPageRoute(
-          builder: (context) => TabScreen(),
+          builder: (context) => const TabScreen(),
         );
       default:
         return null;
