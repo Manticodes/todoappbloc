@@ -67,6 +67,7 @@ class EditTaskWidget extends StatelessWidget {
 
                         titleController.clear();
                         descriptionController.clear();
+                        Navigator.of(context).pop();
                       },
                     )),
               )

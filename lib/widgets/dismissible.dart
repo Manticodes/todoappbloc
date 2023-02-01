@@ -86,24 +86,29 @@ class DismissibleTile extends StatelessWidget {
               PopupMenuButton(
                 itemBuilder: (context) => [
                   PopupMenuItem(
-                      child: TextButton.icon(
-                    label: const Text('Edit'),
-                    onPressed: () => _editTask(context),
-                    icon: const Icon(Icons.edit),
-                  )),
+                    child: TextButton.icon(
+                      label: const Text('Edit'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        _editTask(context);
+                      },
+                      icon: const Icon(Icons.edit),
+                    ),
+                  ),
                   PopupMenuItem(
-                      child: TextButton.icon(
-                    label: const Text('Delete'),
-                    onPressed: () {
-                      context.read<TasksBloc>().add(DeleteTask(task: task));
-                    },
-                    icon: const Icon(Icons.delete),
-                  )),
+                    child: TextButton.icon(
+                      label: const Text('Delete'),
+                      onPressed: () {
+                        context.read<TasksBloc>().add(DeleteTask(task: task));
+                      },
+                      icon: const Icon(Icons.delete),
+                    ),
+                  ),
                 ],
               )
             ],
           ),
-          subtitle: Text(DateFormat('dd-MM-yy hh:mm').format(DateTime.now()))),
+          subtitle: SizedBox()),
     );
   }
 }

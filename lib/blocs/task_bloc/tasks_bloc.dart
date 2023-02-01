@@ -91,7 +91,9 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   void _onRestoreTask(RestoreTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
-        allTasks: List.from(state.allTasks)..add(event.task),
+        allTasks: List.from(state.allTasks)
+          ..add(event.task
+              .copyWith(isDeleted: false, isFav: false, isDone: false)),
         deletedTasks: List.from(state.deletedTasks)..remove(event.task)));
   }
 }
