@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:todoappbloc/blocs/bloc_exports.dart';
 import 'package:todoappbloc/models/task.dart';
-import 'package:todoappbloc/services/id_gen.dart';
 
-class AddTaskWidget extends StatelessWidget {
-  const AddTaskWidget({
+class EditTaskWidget extends StatelessWidget {
+  const EditTaskWidget({
     Key? key,
-    required this.titleController,
-    required this.descriptionController,
+    required this.oldtask,
   }) : super(key: key);
-
-  final TextEditingController titleController;
-  final TextEditingController descriptionController;
+  final Task oldtask;
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController =
+        TextEditingController(text: oldtask.title);
+    TextEditingController descriptionController =
+        TextEditingController(text: oldtask.description);
+
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -54,12 +55,15 @@ class AddTaskWidget extends StatelessWidget {
                             color: Colors.white),
                       ),
                       onTap: () {
-                        String id = IdGen.genId();
                         var task = Task(
                             title: titleController.text,
-                            id: id,
-                            description: descriptionController.text);
-                        context.read<TasksBloc>().add(AddTask(task: task));
+                            id: oldtask.id,
+                            description: descriptionController.text,
+                            isDone: oldtask.isDone,
+                            isFav: oldtask.isFav);
+                        context
+                            .read<TasksBloc>()
+                            .add(EditTask(task: task, oldtask: oldtask));
 
                         titleController.clear();
                         descriptionController.clear();

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:todoappbloc/models/task.dart';
 import '../bloc_exports.dart';
@@ -12,6 +14,9 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<DeleteTask>(_onDeleteTask);
     on<RemovedTask>(_onRemovedTask);
     on<FavTask>(_onFavTask);
+    on<EditTask>(_onEditTask);
+    on<DeleteBin>(_onDeleteBin);
+    on<RestoreTask>(_onRestoreTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -66,5 +71,27 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   @override
   Map<String, dynamic>? toJson(TasksState state) {
     return state.toMap();
+  }
+
+  void _onEditTask(EditTask event, Emitter<TasksState> emit) {
+    final state = this.state;
+    final task = event.task;
+    final oldtask = event.oldtask;
+    int index = state.allTasks.indexOf(oldtask);
+
+    List<Task> allTasks = List.from(state.allTasks);
+    allTasks[index] = task;
+    emit(TasksState(allTasks: allTasks, deletedTasks: state.deletedTasks));
+  }
+
+  void _onDeleteBin(DeleteBin event, Emitter<TasksState> emit) {
+    emit(TasksState(allTasks: state.allTasks, deletedTasks: <Task>[]));
+  }
+
+  void _onRestoreTask(RestoreTask event, Emitter<TasksState> emit) {
+    final state = this.state;
+    emit(TasksState(
+        allTasks: List.from(state.allTasks)..add(event.task),
+        deletedTasks: List.from(state.deletedTasks)..remove(event.task)));
   }
 }

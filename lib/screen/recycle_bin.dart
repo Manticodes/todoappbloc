@@ -16,8 +16,13 @@ class RecycleBin extends StatelessWidget {
         title: const Text('Bin'),
       ),
       body: Column(children: [
-        const Center(
-          child: Chip(label: Text("Deleted Task ")),
+        Center(
+          child: InkWell(
+            child: const Chip(label: Text("Deleted All ")),
+            onLongPress: () {
+              context.read<TasksBloc>().add(DeleteBin());
+            },
+          ),
         ),
         Expanded(
           child: BlocBuilder<TasksBloc, TasksState>(
@@ -32,12 +37,21 @@ class RecycleBin extends StatelessWidget {
                     ),
                     trailing: Wrap(
                       children: [
-                        InkWell(
+                        ElevatedButton(
                           child: const Text('remove'),
-                          onTap: () {
+                          onPressed: () {
                             context
                                 .read<TasksBloc>()
                                 .add(RemovedTask(task: task));
+                          },
+                        ),
+                        const SizedBox(width: 20),
+                        ElevatedButton(
+                          child: const Text('Restore'),
+                          onPressed: () {
+                            context
+                                .read<TasksBloc>()
+                                .add(RestoreTask(task: task));
                           },
                         ),
                       ],

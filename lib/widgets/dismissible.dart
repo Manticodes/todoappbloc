@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todoappbloc/blocs/bloc_exports.dart';
+import 'package:todoappbloc/widgets/edit_task_widget.dart';
 
 import '../models/task.dart';
 
@@ -10,6 +12,17 @@ class DismissibleTile extends StatelessWidget {
   });
 
   final Task task;
+
+  void _editTask(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return SingleChildScrollView(
+            child: EditTaskWidget(oldtask: task),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,45 +52,58 @@ class DismissibleTile extends StatelessWidget {
         }
       },
       child: ListTile(
-        title: Text(
-          task.title,
-          style: TextStyle(
-              decoration: task.isDone! ? TextDecoration.lineThrough : null,
-              decorationThickness: 4,
-              decorationColor: Colors.purple),
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            InkWell(
-              child: task.isFav!
-                  ? const Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    )
-                  : const Icon(Icons.favorite_border_rounded),
-              onTap: () {
-                context.read<TasksBloc>().add(FavTask(task: task));
-              },
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Checkbox(
-              onChanged: (value) {
-                context.read<TasksBloc>().add(UpdateTask(task: task));
-              },
-              value: task.isDone,
-            ),
-          ],
-        ),
-        subtitle: InkWell(
-          child: const Text('Delete'),
-          onTap: () {
-            context.read<TasksBloc>().add(DeleteTask(task: task));
-          },
-        ),
-      ),
+          title: Text(
+            task.title,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                decoration: task.isDone! ? TextDecoration.lineThrough : null,
+                decorationThickness: 4,
+                decorationColor: Colors.purple),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                child: task.isFav!
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : const Icon(Icons.favorite_border_rounded),
+                onTap: () {
+                  context.read<TasksBloc>().add(FavTask(task: task));
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Checkbox(
+                onChanged: (value) {
+                  context.read<TasksBloc>().add(UpdateTask(task: task));
+                },
+                value: task.isDone,
+              ),
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                      child: TextButton.icon(
+                    label: const Text('Edit'),
+                    onPressed: () => _editTask(context),
+                    icon: const Icon(Icons.edit),
+                  )),
+                  PopupMenuItem(
+                      child: TextButton.icon(
+                    label: const Text('Delete'),
+                    onPressed: () {
+                      context.read<TasksBloc>().add(DeleteTask(task: task));
+                    },
+                    icon: const Icon(Icons.delete),
+                  )),
+                ],
+              )
+            ],
+          ),
+          subtitle: Text(DateFormat('dd-MM-yy hh:mm').format(DateTime.now()))),
     );
   }
 }

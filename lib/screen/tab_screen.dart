@@ -18,6 +18,7 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   final List<Map<String, dynamic>> _pageDetails = [
     {'page': const TaskScreen(), 'tite': 'ToDo App'},
@@ -31,9 +32,12 @@ class _TabScreenState extends State<TabScreen> {
   void _addTask(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return SingleChildScrollView(
-            child: AddTaskWidget(titleController: titleController),
+            child: AddTaskWidget(
+                titleController: titleController,
+                descriptionController: descriptionController),
           );
         });
   }

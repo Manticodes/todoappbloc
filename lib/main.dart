@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
               colorScheme: lightColorScheme,
             ),
-            home: TabScreen(),
+            home: const TabScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },
